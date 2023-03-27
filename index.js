@@ -85,7 +85,7 @@ const questions = [{
 {
     type: 'input',
     message: 'Explain how others can contribute',
-    name: 'contibutionExplanation',
+    name: 'contributionExplanation',
     when: ({ Contribution }) => {
         if (Contribution) {
             return true;
@@ -103,7 +103,7 @@ const questions = [{
 {
     type: 'input',
     message: 'Explain how to test your application',
-    name: 'test',
+    name: 'Test',
     when: ({ confirmTest }) => {
         if (confirmTest) {
             return true;
