@@ -66,8 +66,8 @@ const questions = [{
 {
     type: 'input',
     message: 'List instructions',
-    name: 'nstructions',
-    when: ({ 'Instructions'}) => {
+    name: 'Instructions',
+    when: ({ confirmUsage }) => {
         if (Instructions) {
             return true;
         } else {
@@ -172,9 +172,31 @@ validate: nameInput => {
     }
   }];
 
-  
-}
-}
+  function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, error => {
+        if (error) {
+            return console.log('There was an error: ' + error);
+        }
+    })
+  }
+
+  const createReadMe = util.promisify(writeToFile);
+
+  async function init() {
+    try {
+        const userAnswers = await inquirer.createPromptModule(questions);
+        console.log('Success! The data is being put into your ReadMe.md: ', userAnswers);
+
+        const myMarkdown = generateMarkdown(userAnswers);
+        console.log(myMarkdown);
+        await createReadMe('README1.md', myMarkdown);
+
+    } catch (error) {
+        console.log('There was an error' + error);
+    }
+  };
+
+  init();
 
 
 
