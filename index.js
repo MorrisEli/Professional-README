@@ -2,7 +2,7 @@
 const inquirer = require("inquirer");
 const fs = require('fs');
 const util = require("util");
-const generateMarkdown = require("./generateMarkdown");
+const generateMarkdown = require("./utils/generateMarkdown");
 // TODO: Create an array of questions for user input
 
 //title of project
@@ -117,10 +117,7 @@ const questions = [{
     type: 'checkbox',
     message: 'Choose a license',
     name: 'License',
-    choices: ['GNU AGPLv3', 'GNU GPLv3',
-    'GNU LGPLv3', 'Mozilla Public License 2.0',
-    'Apache License 2.0', 'MIT License', 'Boost Software License 1.0',
-    'The Unlicense'],
+    choices: ["APACHE 2.0", "MIT", "NONE"],
     validate: nameInput => {
         if (nameInput) {
             return true;

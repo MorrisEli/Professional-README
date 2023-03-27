@@ -19,7 +19,7 @@ function renderLicenseBadge(license) {
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
-function renderLicenseLink(license) {
+function renderLicenseLink(license) {//Choices in index.js, if a license is selected than the currect URL is chosen
     let choose = "";
     if (license === "APACHE 2.0"){
         choose = "(https://opensource.org/licenses/Apache-2.0)"
@@ -28,6 +28,7 @@ function renderLicenseLink(license) {
      choose = "(https://opensource.org/licenses/MIT)"
      return choose
  } if (license === "NONE"){
+    //empty string
      choose = ""
      return choose
  }
