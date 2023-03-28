@@ -10,28 +10,11 @@ const questions = [{
     type: "input",
     message: "What is the title of the project?",
     name: "Title",
-
-    validate: nameInput => {
-        if(nameInput) {
-            return true;
-        } else {
-            console.log('Enter Project Title')
-            return false;
-        }
-    }
 }, {
     //Description of project
     type: "input",
     message: "What is the project about? (Detailed description)",
     name: "Description",
-    validate: nameInput => {
-        if (nameInput) {
-            return true;
-        } else {
-            console.log('Enter Descrpiption of your project.');
-            return false;
-        }
-    }
 },
 //Installation process
 {
@@ -48,14 +31,6 @@ const questions = [{
     type: 'input',
     message: 'Installation instructions',
     name: 'installationInstruction',
-    When: ({ Installation }) => {
-        if(Installation) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
 },
 //instructions
 {
@@ -86,13 +61,6 @@ const questions = [{
     type: 'input',
     message: 'Explain how others can contribute',
     name: 'contributionExplanation',
-    when: ({ Contribution }) => {
-        if (Contribution) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 },
 //testing
 {
@@ -132,66 +100,47 @@ const questions = [{
 type: 'input',
 name: 'username',
 message: 'What is your GitHub username?',
-validate: nameInput => {
-    if (nameInput) {
-        return true;
-      } else {
-        console.log('Please enter your GitHub username.');
-        return false;
-      }
-    }
   },
   //email
   {
     type: 'input',
     name: 'email',
     message: 'What is your email address?',
-    validate: nameInput => {
-        if (nameInput) {
-            return true;
-        } else {
-            console.log('Enter your email address');
-            return false;
-        }
-    }
   },
   //additional contact info
   {
     type: 'input',
     name: 'contact',
     message: 'List instructions on how to contact you',
-    validate: (nameInput) => {
-        if (nameInput) {
-            return true;
-        } else {
-            return false;
-        }
-    }
   }];
 
-  function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, error => {
-        if (error) {
-            return console.log('There was an error: ' + error);
+  function writeToFile(data) {
+    console.log("Write to file")
+    fs.writeFile("readme.md", data, (err) => {
+        if (err) throw err;
+    console.log("File saved");
+
+    });
+}
+
+function init() {
+    inquirer.prompt(questions).then((answers) => {
+    console.log(answers)
+    const bodyReadme = generateMarkdown({ ...answers});
+    writeToFile(bodyReadme)
+})
+
+
+    .catch(error => {
+        if (error.isTtyError) {
+            console.log("error");
+        } else {
+            console.log("Success! the data is being put into your README.md");
         }
-    })
+    });
   }
 
   const createReadMe = util.promisify(writeToFile);
-
-  async function init() {
-    try {
-        const userAnswers = await inquirer.createPromptModule(questions);
-        console.log('Success! The data is being put into your ReadMe.md: ', userAnswers);
-
-        const myMarkdown = generateMarkdown(userAnswers);
-        console.log(myMarkdown);
-        await createReadMe('README1.md', myMarkdown);
-
-    } catch (error) {
-        console.log('There was an error' + error);
-    }
-  };
 
   init();
 
