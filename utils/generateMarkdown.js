@@ -1,16 +1,17 @@
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
-function renderLicenseBadge(license) {
-    let choose = "";
-    if (license === "APACHE 2.0") {
-        choose = "[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)]"
-        return choose
-    }
-    if (license === "MIT") {
-        choose = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]"
-        return choose
-    }
-    if (license === "NONE"){
+function generateMarkdown(data) {
+    let licenseOption = '${data.license}';
+    let licenseLink = '';
+    if (licenseOption === "APACHE 2.0") {
+        licenseOption = 'ApacheLicense2.0';
+        licenseLink = 'https://choosealicense.com/licenses/apache-2.0/';
+    };
+    if (licenseOption === 'MIT License') {
+        licenseOption = 'MITLicense';
+        licenseLink = 'https://choosealicense.com/licenses/mit/';
+      };
+    if (licenseOption === "NONE"){
         choose = ""
         return choose
     }
@@ -42,61 +43,124 @@ function renderLicenseSection(license) {
     ${bLink}
     
     `
-}
+};
 
 // TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
-    console.log("generate markdown function")
-    const badge = renderLicenseBadge(data.license)
-  return `# ${data.title}
-  ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
+let markdownTemplate = 
 
+`# ${data.title}
 
-## Table of Contents
+![badge](https://img.shields.io/badge/license-${licenseOption}-brightorange)
 
-* [Description](*Description)
+## Description 
 
-* [Installation](#Installation)
-
-*[Instructions](*Instructions)
-
-* [Contribution](#Contribution)
-
-* [Tests](#Tests)
-
-* [License](#License)
-
-* [Contact](#Contact)
-
-
-## Description
 ${data.Description}
 
+
+`;
+
+//seperating table of contents
+
+let tableOfContents = 
+`## Table of Contents`;
+    if (data.installation) {
+        tableOfContents +=
+        `
+        * [Installation](#Installation)`
+    };
+    if (data.installation) {
+        tableOfContents +=
+        `
+        *[Installation](#Installation)
+        `
+    };
+    if (data.Contribution) {
+        tableOfContents += 
+        `
+        * [Contribution](#Contribution)
+        `
+    };
+    if (data.testing) {
+        tableOfContents +=
+          `
+      * [Testing](#testing)`
+      };
+
+      //append
+      markdownTemplate += tableOfContents;
+
+      markdownTemplate +=
+      `
+      * [Questions](#questions)`;
+  markdownTemplate +=
+    `
+  * [License](#license)
+      `;
+
+      if (data.Installation) {
+        markdownTemplate +=
+        `
 ## Installation
 
-To install, run command:
-${data.command}
+${data.Installation}`
+      };
+
+if (data.Instructions) {
+    markdownTemplate +=
+    `
+## Usage
+
+${data.Instructions}
+    `
+};
+if (data.Contribution) {
+    markdownTemplate +=
+    `
 
 ## Contribution
+
 ${data.Contribution}
+    `
+};
 
-## Tests
-${data.Tests}
+if (data.testing) {
+    markdownTemplate +=
+      `
+      
+## Testing
 
-To run tests, use the following command:
-${data.Tests}
+${data.testing}
+    `
+};
 
+markdownTemplate +=
+      `
+      
+## Questions
+      
+  _For further questions:_
+  ${data.questions}
+  
+  _Contact Info:_
+  GitHub: [${data.username}](https://github.com/${data.username})
+  Email: [${data.email}](mailto:${data.email})`;
+  
+  markdownTemplate +=
+    `
+    
 ## License
-${data.license}
-
-## [Contribution](#Contribution)
-${data.Contribution}
-
+      
+  _This application has the ${data.license}._
+      
+  For more information please view the [license description](${licenseLink})
+  
   `;
-// ^ generates title ^
+  return markdownTemplate;
 
 
 
-}
+
+
+
 
 module.exports = generateMarkdown;

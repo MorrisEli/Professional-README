@@ -164,6 +164,7 @@ validate: nameInput => {
         const myMarkdown = generateMarkdown(userAnswers);
         console.log(myMarkdown);
         await createReadMe('README1.md', myMarkdown);
+        
     } catch (error) {
         console.log('There was an error' + error);
     }
