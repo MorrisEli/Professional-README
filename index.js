@@ -22,33 +22,11 @@ const questions = [{
     message: 'Is there an installation process?',
     name: 'confirmInstallation'
 },
-{
-    type: 'input',
-    message: 'Is there an installation?',
-    name: 'Installation'
-},
-{
-    type: 'input',
-    message: 'Installation instructions',
-    name: 'installationInstruction'
-},
 //instructions
 {
     type: 'confirm',
     name: 'confirmUsage',
     message: 'Are there any instructions you would like to give?'
-},
-{
-    type: 'input',
-    message: 'List instructions',
-    name: 'Instructions',
-    when: ({ confirmUsage }) => {
-        if (Instructions) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 },
 //contribution
 {
@@ -71,29 +49,14 @@ const questions = [{
 {
     type: 'input',
     message: 'Explain how to test your application',
-    name: 'Test',
-    when: ({ confirmTest }) => {
-        if (confirmTest) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    name: 'Test'
 },
 //license
 {
     type: 'checkbox',
     message: 'Choose a license',
     name: 'License',
-    choices: ["APACHE 2.0", "MIT", "NONE"],
-    validate: nameInput => {
-        if (nameInput) {
-            return true;
-        } else {
-            console.log('Select a license');
-            return false;
-        }
-    }
+    choices: ["APACHE 2.0", "MIT", "NONE"]
 },
 //github username
 {

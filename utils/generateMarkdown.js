@@ -46,11 +46,19 @@ function renderLicenseSection(license) {
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
+    console.log("generate markdown function")
+    const badge = renderLicenseBadge(data.license)
   return `# ${data.title}
+  ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
+
 
 ## Table of Contents
 
+* [Description](*Description)
+
 * [Installation](#Installation)
+
+*[Instructions](*Instructions)
 
 * [Contribution](#Contribution)
 
@@ -62,15 +70,18 @@ function generateMarkdown(data) {
 
 
 ## Description
+${data.Description}
 
 ## Installation
 
 To install, run command:
+${data.command}
 
 ## Contribution
 ${data.Contribution}
 
 ## Tests
+${data.Tests}
 
 To run tests, use the following command:
 ${data.Tests}
@@ -78,17 +89,8 @@ ${data.Tests}
 ## License
 ${data.license}
 
-
-
-* [Directions](#Directions)
-
 ## [Contribution](#Contribution)
-
-##[Testing](#Test)
-
-## [License](#License)
-
-*
+${data.Contribution}
 
   `;
 // ^ generates title ^
