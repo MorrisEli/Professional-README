@@ -20,7 +20,7 @@
 
 
 ## Description
-Detailed description of project
+description
 
 ## Installation
 
@@ -28,7 +28,7 @@ To install, run command:
 undefined
 
 ## Contribution
-true
+undefined
 
 ## Tests
 undefined
@@ -40,6 +40,6 @@ undefined
 undefined
 
 ## [Contribution](#Contribution)
-true
+undefined
 
   

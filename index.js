@@ -9,12 +9,28 @@ const generateMarkdown = require("./utils/generateMarkdown");
 const questions = [{
     type: "input",
     message: "What is the title of the project?",
-    name: "Title"
+    name: "Title",
+    validate: nameInput => {
+        if (nameInput) {
+            return true;
+        } else {
+            console.log('Enter your project title.');
+            return false;
+        }
+    }
 }, {
     //Description of project
     type: "input",
     message: "What is the project about? (Detailed description)",
-    name: "Description"
+    name: "Description",
+    validate: nameInput => {
+        if(nameInput) {
+            return true;
+        } else {
+            console.log('Enter description.');
+            return false;
+        }
+    }
 },
 //Installation process
 {
@@ -22,30 +38,58 @@ const questions = [{
     message: 'Is there an installation process?',
     name: 'confirmInstallation'
 },
-//instructions
 {
-    type: 'confirm',
-    name: 'confirmUsage',
-    message: 'Are there any instructions you would like to give?'
+    type: 'input',
+    name: 'Installation',
+    message: 'List Installion instructions',
+    when: ({confirmInstallation}) => {
+        if (confirmInstallation) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 },
+//instructions
+
 //contribution
 {
     type: 'confirm',
     message: 'Can other developers contribute to your project?',
-    name: 'Contribution'
+    name: 'confirmContribution'
 },
-
 {
     type: 'input',
-    message: 'Explain how others can contribute',
-    name: 'contributionExplanation'
+    message: 'Please explain how how others can contribute your project',
+    name: 'confirmContribution',
+    when: ({ confirmContribution }) => {
+        if (confirmContribution) {
+          return true;
+        } else {
+          return false;
+        }
+      }
 },
+
 //testing
 {
     type: 'confirm',
     name: 'confirmTest',
     message: 'Is there any available testing?'
 },
+{
+    type: 'input',
+    message: 'Explain how to test application',
+    name: 'Test',
+    when: ({ testConfirm }) => {
+        if (testConfirm) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+},
+
 {
     type: 'input',
     message: 'Explain how to test your application',
@@ -63,18 +107,43 @@ const questions = [{
 type: 'input',
 name: 'username',
 message: 'What is your GitHub username?',
+validate: nameInput => {
+    if (nameInput) {
+        return true;
+    } else {
+        console.log('Enter your GitHub username');
+        return false;
+    }
+}
   },
   //email
   {
     type: 'input',
     name: 'email',
     message: 'What is your email address?',
+    validate: nameInput => {
+        if (nameInput) {
+            if (nameInput) {
+                return true;
+            } else {
+                console.log('Enter your email');
+                return false;
+            }
+        }
+    }
   },
   //additional contact info
   {
     type: 'input',
     name: 'contact',
     message: 'List instructions on how to contact you',
+    validate: (nameInput) => {
+        if (nameInput) {
+            return true;
+        } else {
+            return false;
+        }
+    }
   }];
 
   function writeToFile(data) {
