@@ -4,11 +4,11 @@
 
 ## Table of Contents
 
-* [Description](*Description)
+* [Description](#Description)
 
 * [Installation](#Installation)
 
-*[Instructions](*Instructions)
+* [Instructions](#Instructions)
 
 * [Contribution](#Contribution)
 
@@ -20,7 +20,7 @@
 
 
 ## Description
-Project is made to create a quick readme file
+Detailed description of project
 
 ## Installation
 
@@ -28,7 +28,7 @@ To install, run command:
 undefined
 
 ## Contribution
-undefined
+true
 
 ## Tests
 undefined
@@ -39,7 +39,7 @@ undefined
 ## License
 undefined
 
-## [Contribution](#Contribution)
-undefined
+## Contact
+true
 
   
