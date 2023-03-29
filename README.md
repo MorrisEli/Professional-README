@@ -20,7 +20,7 @@
 
 
 ## Description
-description
+Project is made to create a quick readme file
 
 ## Installation
 

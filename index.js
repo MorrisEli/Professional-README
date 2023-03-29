@@ -1,8 +1,8 @@
 // TODO: Include packages needed for this application
-const inquirer = require("inquirer");
+const inquirer = require('inquirer');
 const fs = require('fs');
-const util = require("util");
-const generateMarkdown = require("./utils/generateMarkdown");
+const util = require('util');
+const generateMarkdown = require('./utils/generateMarkdown');
 // TODO: Create an array of questions for user input
 
 //title of project
@@ -146,33 +146,28 @@ validate: nameInput => {
     }
   }];
 
-  function writeToFile(data) {
-    console.log("Write to file")
-    fs.writeFile("readme.md", data, (err) => {
-        if (err) throw err;
-    console.log("File saved");
-
-    });
-}
-
-function init() {
-    inquirer.prompt(questions).then((answers) => {
-    console.log(answers)
-    const bodyReadme = generateMarkdown({ ...answers});
-    writeToFile(bodyReadme)
-})
-
-
-    .catch(error => {
-        if (error.isTtyError) {
-            console.log("error");
-        } else {
-            console.log("Success! the data is being put into your README.md");
+  function writeFile(fileName, data) {
+    fs.writeFile(fileName, data, error => {
+        if(error) {
+            return console.log('There was an error ; ' + error);
         }
-    });
+    })
   }
 
-  const createReadMe = util.promisify(writeToFile);
+
+
+  async function init() {
+    try {
+        const userAnswers = await inquirer.promp(questions);
+        console.log('The current data is being processed into README.d: ', userAnswers);
+
+        const myMarkdown = generateMarkdown(userAnswers);
+        console.log(myMarkdown);
+        await createReadMe('README1.md', myMarkdown);
+    } catch (error) {
+        console.log('There was an error' + error);
+    }
+  };
 
   init();
 
