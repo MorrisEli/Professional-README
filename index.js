@@ -9,12 +9,12 @@ const generateMarkdown = require("./utils/generateMarkdown");
 const questions = [{
     type: "input",
     message: "What is the title of the project?",
-    name: "Title",
+    name: "Title"
 }, {
     //Description of project
     type: "input",
     message: "What is the project about? (Detailed description)",
-    name: "Description",
+    name: "Description"
 },
 //Installation process
 {
@@ -30,7 +30,7 @@ const questions = [{
 {
     type: 'input',
     message: 'Installation instructions',
-    name: 'installationInstruction',
+    name: 'installationInstruction'
 },
 //instructions
 {
@@ -60,7 +60,7 @@ const questions = [{
 {
     type: 'input',
     message: 'Explain how others can contribute',
-    name: 'contributionExplanation',
+    name: 'contributionExplanation'
 },
 //testing
 {
